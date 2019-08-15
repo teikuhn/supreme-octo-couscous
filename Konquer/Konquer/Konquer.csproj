@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="Classes\InterfaceControls\Button.cs" />
     <Compile Include="Classes\InterfaceControls\Control.cs" />
+    <Compile Include="Classes\Models\Animation.cs" />
+    <Compile Include="Classes\Models\AnimationPlayer.cs" />
     <Compile Include="Classes\Models\MovementWrapper.cs" />
     <Compile Include="Classes\Screens\BaseScreen.cs" />
     <Compile Include="Classes\Screens\GameScreen.cs" />

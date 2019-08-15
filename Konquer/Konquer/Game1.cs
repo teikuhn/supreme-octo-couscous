@@ -39,8 +39,9 @@ namespace Konquer
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _tileTexture = Content.Load<Texture2D>("Tiles/L2/BlockA1");
             _playerTexture = Content.Load<Texture2D>("Tiles/L2/Platform");
-
             _player = new Player(_playerTexture, new Vector2(50, 50), _spriteBatch);
+            
+            //_player.Load(Content);
             _board = new Board(_spriteBatch, _tileTexture, 59, 25);
 
             _debugFont = Content.Load<SpriteFont>("DebugFont");
