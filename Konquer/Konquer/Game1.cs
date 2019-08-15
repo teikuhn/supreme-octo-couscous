@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Konquer.Classes.Sprites;
+using Konquer.Classes.World;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -9,75 +11,74 @@ namespace Konquer
     /// </summary>
     public class Game1 : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        private GraphicsDeviceManager _graphics;
+        private SpriteBatch _spriteBatch;
+        private Texture2D _tileTexture, _playerTexture;
+        private Player _player;
+        private Board _board;
+        private SpriteFont _debugFont;
+
+        public int ScreenWidth = 1888, ScreenHeight = 1000;
+
 
         public Game1()
         {
-            graphics = new GraphicsDeviceManager(this);
+            _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            _graphics.PreferredBackBufferWidth = ScreenWidth;
+            _graphics.PreferredBackBufferHeight = ScreenHeight;
         }
 
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             base.Initialize();
         }
 
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            _tileTexture = Content.Load<Texture2D>("Tiles/L2/BlockA1");
+            _playerTexture = Content.Load<Texture2D>("Tiles/L2/Platform");
 
-            // TODO: use this.Content to load your game content here
+            _player = new Player(_playerTexture, new Vector2(50, 50), _spriteBatch);
+            _board = new Board(_spriteBatch, _tileTexture, 59, 25);
+
+            _debugFont = Content.Load<SpriteFont>("DebugFont");
         }
-
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// game-specific content.
-        /// </summary>
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
-            // TODO: Add your update logic here
-
             base.Update(gameTime);
+            _player.Update(gameTime);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
-
+            _spriteBatch.Begin();
             base.Draw(gameTime);
+            _board.Draw();
+            _player.Draw();
+            WriteDebugInfo();
+            _spriteBatch.End();
+        }
+
+        private void WriteDebugInfo()
+        {
+            string positionInText =
+                string.Format("Position of Player: ({0:0.0}, {1:0.0})", _player.Position.X, _player.Position.Y);
+            string movementInText =
+                string.Format("Current movement: ({0:0.0}, {1:0.0})", _player.Movement.X, _player.Movement.Y);
+            string isGroundedText =
+                string.Format("Grounded? : {0}", _player.IsGrounded());
+
+            _spriteBatch.DrawString(_debugFont, positionInText, new Vector2(10, 0), Color.White);
+            _spriteBatch.DrawString(_debugFont, movementInText, new Vector2(10, 20), Color.White);
+            _spriteBatch.DrawString(_debugFont, isGroundedText, new Vector2(10, 40), Color.White);
         }
     }
 }
