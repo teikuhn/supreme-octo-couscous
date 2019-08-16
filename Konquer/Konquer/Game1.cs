@@ -41,7 +41,7 @@ namespace Konquer
             _playerTexture = Content.Load<Texture2D>("Tiles/L2/Platform");
             _player = new Player(_playerTexture, new Vector2(50, 50), _spriteBatch);
             
-            //_player.Load(Content);
+            _player.Load(Content);
             _board = new Board(_spriteBatch, _tileTexture, 59, 25);
 
             _debugFont = Content.Load<SpriteFont>("DebugFont");
@@ -62,8 +62,8 @@ namespace Konquer
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin();
             base.Draw(gameTime);
-            _board.Draw();
-            _player.Draw();
+            _board.Draw(gameTime);
+            _player.Draw(gameTime);
             WriteDebugInfo();
             _spriteBatch.End();
         }

@@ -141,11 +141,11 @@ namespace Konquer.Classes.World
             }
         }
 
-        public void Draw()
+        public void Draw(GameTime gameTime)
         {
             foreach (var tile in Tiles)
             {
-                tile.Draw();
+                tile.Draw(gameTime);
             }
         }
     }

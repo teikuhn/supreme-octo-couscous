@@ -12,6 +12,7 @@ namespace Konquer.Classes.Models
     struct AnimationPlayer
     {
         Animation animation;
+        Rectangle drawRectangle;
         public Animation Animation
         {
             get { return animation; }
@@ -44,6 +45,8 @@ namespace Konquer.Classes.Models
         {
             if (Animation == null)
                 throw new NotSupportedException("No animation selected");
+            if (drawRectangle == null)
+                new Rectangle(frameIndex * Animation.FrameWidth, 0, Animation.FrameWidth, Animation.FrameHeight);
 
             timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             while (timer >= animation.FrameTime)
@@ -55,9 +58,12 @@ namespace Konquer.Classes.Models
                 else frameIndex = Math.Min(frameIndex + 1, animation.FrameCount - 1);
             }
 
-            Rectangle rectangle = new Rectangle(frameIndex * Animation.FrameWidth, 0, Animation.FrameWidth, Animation.FrameHeight);
+            drawRectangle.X = frameIndex * Animation.FrameWidth;
+            drawRectangle.Y = 0;
+            drawRectangle.Width = Animation.FrameWidth;
+            drawRectangle.Height = Animation.FrameHeight;
 
-            spriteBatch.Draw(Animation.Texture, position, rectangle, Color.White, 0f, Origin, 1f, spriteEffects, 0f);
+            spriteBatch.Draw(Animation.Texture, position, drawRectangle, Color.White, 0f, Origin, 1f, spriteEffects, 0f);
         }
     }
 }

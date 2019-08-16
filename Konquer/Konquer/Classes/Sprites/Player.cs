@@ -16,18 +16,23 @@ namespace Konquer.Classes.Sprites
     // In de Player klasse wordt gameplay input verwerkt en positie/beweging berekend.
     public class Player : Sprite
     {
-        //AnimationPlayer animationPlayer;
-        //Animation walkAnimation;
-        //Animation idleAnimation;
+        AnimationPlayer animationPlayer;
+        Animation runAnimation;
+        Animation idleAnimation;
 
+        private SpriteBatch playerSpriteBatch;
         private Vector2 pastPosition;
+        private long lastJumpTimeMillis { get; set; }
+        private bool doubleJumpActivatable { get; set; }
         public Vector2 Movement { get; set; }
+        public int JumpCounter = 0;
 
-        //public void Load(ContentManager Content)
-        //{
-        //    walkAnimation = new Animation(Content.Load<Texture2D>("hero/gothic-hero-run"), 66, 0.1f, true);
-        //    idleAnimation = new Animation(Content.Load<Texture2D>("hero/gothic-hero-idle"), 38, 0.3f, true);
-        //}
+        public void Load(ContentManager Content)
+        {
+            idleAnimation = new Animation(Content.Load<Texture2D>("hero/gothic-hero-idle"), 38, 0.3f, true);
+            runAnimation = new Animation(Content.Load<Texture2D>("hero/gothic-hero-run"), 66, 0.1f, true);
+            animationPlayer.PlayAnimation(idleAnimation);
+        }
 
         public bool IsGrounded()
         {
@@ -36,12 +41,16 @@ namespace Konquer.Classes.Sprites
             return !Board.CurrentBoard.HasRoomForRectangle(onePixelBelow);
         }
 
+        public bool CanDoubleJump()
+        {
+            return ((DateTime.Now.Ticks / 1000) - lastJumpTimeMillis > 800) && doubleJumpActivatable;
+        }
+
         public Player(Texture2D texture, Vector2 position, SpriteBatch spriteBatch)
             : base(texture, position, spriteBatch)
         {
+            this.playerSpriteBatch = spriteBatch;
         }
-
-
 
         public void Update(GameTime gameTime)
         {
@@ -77,14 +86,14 @@ namespace Konquer.Classes.Sprites
 
             if (keyboardState.IsKeyDown(Keys.Left)) { Movement += new Vector2(-1, 0); }
             if (keyboardState.IsKeyDown(Keys.Right)) { Movement += new Vector2(1, 0); }
-            if (keyboardState.IsKeyDown(Keys.Space)) { Movement = -Vector2.UnitY * 35;}
+            if (keyboardState.IsKeyDown(Keys.Space) && CanDoubleJump()) { Movement = -Vector2.UnitY * 55; doubleJumpActivatable = false; }
+            if (keyboardState.IsKeyDown(Keys.Space) && IsGrounded()) { lastJumpTimeMillis = DateTime.Now.Ticks / 1000; Movement = -Vector2.UnitY * 55; doubleJumpActivatable = true; }
 
-            //if (Movement.X != 0)
-            //    animationPlayer.PlayAnimation(walkAnimation);
-            //else if (Movement.X == 0)
-            //    animationPlayer.PlayAnimation(idleAnimation);
-            // Onderstaande: jump only if grounded
-            //if (keyboardState.IsKeyDown(Keys.Space) && IsGrounded()) { Movement = -Vector2.UnitY * 55; }
+            if (Movement.X == 0)
+                animationPlayer.PlayAnimation(idleAnimation);
+            else if (Movement.X != 0)
+                animationPlayer.PlayAnimation(runAnimation);
+
         }
 
         private void SimulateFriction()
@@ -97,16 +106,16 @@ namespace Konquer.Classes.Sprites
         {
             Position += Movement * (float)gameTime.ElapsedGameTime.TotalMilliseconds / 15;
         }
-        //public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        //{
-        //    SpriteEffects flip = SpriteEffects.None;
+        public override void Draw(GameTime gameTime)
+        {
+            SpriteEffects flip = SpriteEffects.None;
 
-        //    if (Movement.X >= 0)
-        //        flip = SpriteEffects.None;
-        //    else if (Movement.X < 0)
-        //        flip = SpriteEffects.FlipHorizontally;
+            if (Movement.X >= 0)
+                flip = SpriteEffects.None;
+            else if (Movement.X < 0)
+                flip = SpriteEffects.FlipHorizontally;
 
-        //    animationPlayer.Draw(gameTime, spriteBatch, Position, flip);
-        //}
+            animationPlayer.Draw(gameTime, playerSpriteBatch, Position, flip);
+        }
     }
 }

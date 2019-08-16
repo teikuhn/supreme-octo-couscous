@@ -26,7 +26,7 @@ namespace Konquer.Classes.Sprites
             SpriteBatch = batch;
         }
 
-        public virtual void Draw()
+        public virtual void Draw(GameTime gameTime)
         {
             SpriteBatch.Draw(Texture, Position, Color.White);
         }

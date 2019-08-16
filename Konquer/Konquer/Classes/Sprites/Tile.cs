@@ -19,9 +19,9 @@ namespace Konquer.Classes.Sprites
             IsBlocked = isBlocked;
         }
 
-        public override void Draw()
+        public override void Draw(GameTime gameTime)
         {
-            if (IsBlocked) { base.Draw(); }
+            if (IsBlocked) { base.Draw(gameTime); }
         }
     }
 }
