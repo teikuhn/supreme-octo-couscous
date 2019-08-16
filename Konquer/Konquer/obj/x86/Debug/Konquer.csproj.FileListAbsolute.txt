@@ -89,3 +89,11 @@ C:\Users\Koen\Documents\0_EAICT_jaar3_sem1\Game_Development_18-19\Konquer\GameDe
 C:\Users\Koen\Documents\0_EAICT_jaar3_sem1\Game_Development_18-19\Konquer\GameDev_Konquer\Konquer\Konquer\obj\x86\Debug\Konquer.csproj.CopyComplete
 C:\Users\Koen\Documents\0_EAICT_jaar3_sem1\Game_Development_18-19\Konquer\GameDev_Konquer\Konquer\Konquer\obj\x86\Debug\Konquer.exe
 C:\Users\Koen\Documents\0_EAICT_jaar3_sem1\Game_Development_18-19\Konquer\GameDev_Konquer\Konquer\Konquer\obj\x86\Debug\Konquer.pdb
+C:\Users\Koen\Documents\0_EAICT_jaar3_sem1\Game_Development_18-19\Konquer\GameDev_Konquer\Konquer\Konquer\bin\Windows\x86\Debug\Content\BG\BG0.xnb
+C:\Users\Koen\Documents\0_EAICT_jaar3_sem1\Game_Development_18-19\Konquer\GameDev_Konquer\Konquer\Konquer\bin\Windows\x86\Debug\Content\BG\BG1.xnb
+C:\Users\Koen\Documents\0_EAICT_jaar3_sem1\Game_Development_18-19\Konquer\GameDev_Konquer\Konquer\Konquer\bin\Windows\x86\Debug\Content\BG\BG2.xnb
+C:\Users\Koen\Documents\0_EAICT_jaar3_sem1\Game_Development_18-19\Konquer\GameDev_Konquer\Konquer\Konquer\bin\Windows\x86\Debug\Content\BG\BG3.xnb
+C:\Users\Koen\Documents\0_EAICT_jaar3_sem1\Game_Development_18-19\Konquer\GameDev_Konquer\Konquer\Konquer\bin\Windows\x86\Debug\Content\BG\BG4.xnb
+C:\Users\Koen\Documents\0_EAICT_jaar3_sem1\Game_Development_18-19\Konquer\GameDev_Konquer\Konquer\Konquer\bin\Windows\x86\Debug\Content\BG\BG5.xnb
+C:\Users\Koen\Documents\0_EAICT_jaar3_sem1\Game_Development_18-19\Konquer\GameDev_Konquer\Konquer\Konquer\bin\Windows\x86\Debug\Content\BG\BG6.xnb
+C:\Users\Koen\Documents\0_EAICT_jaar3_sem1\Game_Development_18-19\Konquer\GameDev_Konquer\Konquer\Konquer\bin\Windows\x86\Debug\Content\BG\BG7.xnb

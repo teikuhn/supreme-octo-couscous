@@ -63,6 +63,9 @@ namespace Konquer.Classes.Models
             drawRectangle.Width = Animation.FrameWidth;
             drawRectangle.Height = Animation.FrameHeight;
 
+            position.Y += 40;
+            position.X += 16;
+
             spriteBatch.Draw(Animation.Texture, position, drawRectangle, Color.White, 0f, Origin, 1f, spriteEffects, 0f);
         }
     }

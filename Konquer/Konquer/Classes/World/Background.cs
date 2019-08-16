@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -49,7 +50,7 @@ namespace Konquer.Classes.World
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_activetexture, new Rectangle(0, 0, 1280, 720), Color.White);
+            spriteBatch.Draw(_activetexture, new Rectangle(0, 0, 1888, 1000), Color.White);
             //spriteBatch.Draw(_activetexture, new Rectangle(1280, 0, 1280, 720), Color.White);
         }
 

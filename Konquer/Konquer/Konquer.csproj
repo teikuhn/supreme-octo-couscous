@@ -52,6 +52,7 @@
     <Compile Include="Classes\Sprites\Player.cs" />
     <Compile Include="Classes\Sprites\Sprite.cs" />
     <Compile Include="Classes\Sprites\Tile.cs" />
+    <Compile Include="Classes\World\Background.cs" />
     <Compile Include="Classes\World\Board.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />

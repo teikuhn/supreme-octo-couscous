@@ -3,6 +3,7 @@ using Konquer.Classes.World;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace Konquer
 {
@@ -13,9 +14,13 @@ namespace Konquer
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+
         private Texture2D _tileTexture, _playerTexture;
         private Player _player;
+
         private Board _board;
+        private Background background1;
+
         private SpriteFont _debugFont;
 
         public int ScreenWidth = 1888, ScreenHeight = 1000;
@@ -43,6 +48,19 @@ namespace Konquer
             
             _player.Load(Content);
             _board = new Board(_spriteBatch, _tileTexture, 59, 25);
+            //Animated background
+            List<Texture2D> _BG = new List<Texture2D>();
+            _BG.Add(Content.Load<Texture2D>("BG/BG0"));
+            _BG.Add(Content.Load<Texture2D>("BG/BG1"));
+            _BG.Add(Content.Load<Texture2D>("BG/BG2"));
+            _BG.Add(Content.Load<Texture2D>("BG/BG3"));
+            _BG.Add(Content.Load<Texture2D>("BG/BG4"));
+            _BG.Add(Content.Load<Texture2D>("BG/BG5"));
+            _BG.Add(Content.Load<Texture2D>("BG/BG6"));
+            _BG.Add(Content.Load<Texture2D>("BG/BG7"));
+            background1 = new Background();
+            background1.SetBG(_BG);
+
 
             _debugFont = Content.Load<SpriteFont>("DebugFont");
         }
@@ -62,7 +80,10 @@ namespace Konquer
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin();
             base.Draw(gameTime);
+
+            background1.Draw(_spriteBatch);
             _board.Draw(gameTime);
+            
             _player.Draw(gameTime);
             WriteDebugInfo();
             _spriteBatch.End();
