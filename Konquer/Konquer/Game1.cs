@@ -48,6 +48,7 @@ namespace Konquer
             
             _player.Load(Content);
             _board = new Board(_spriteBatch, _tileTexture, 59, 25);
+
             //Animated background
             List<Texture2D> _BG = new List<Texture2D>();
             _BG.Add(Content.Load<Texture2D>("BG/BG0"));
@@ -72,6 +73,7 @@ namespace Konquer
         protected override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            background1.Update(gameTime);
             _player.Update(gameTime);
         }
 
